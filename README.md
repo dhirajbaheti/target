@@ -17,12 +17,20 @@ cd ../target
 python -m pip install -r requirements.txt
 ```
 
-
-### Crawling from a given list of product urls
-You need to specift a list of URLs that you want a spider
+### Crawling product specific urls from command line
+You need to specify a list of URLs on command line that you want a spider
 to scrape without extracting any further URLs from those pages.
 
-Save a column of URLs (without a header) in a file called `urls_to_crawl`:
+Then run below command to start crawling:
+
+```
+scrapy crawl product -a urls="https://www.target.com/p/-/A-16666753,https://www.target.com/p/-/A-79344798" 2>crawl_product.err >crawl_product.log
+```
+
+### Crawling urls listed in a file urls (Recommanded for high number of URLs)
+You need to specify a list of URLs that you want to scrape without extracting any further URLs from those pages.
+
+Save a column of URLs (without a header) in a file called `urls`:
 ```
 https://www.target.com/p/-/A-79344798
 https://www.target.com/p/-/A-13493042
