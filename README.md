@@ -10,7 +10,7 @@ conda create -n target-env python=3.10
 2. Activate conda environment and change directory to project directory.
 ```
 conda activate target-env
-cd path/to/target
+cd ../target
 ```
 3. Install requirements.txt
 ```
