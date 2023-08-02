@@ -55,8 +55,12 @@ class ProductSpider(CrawlSpider):
         item["url"] = product.get('item', {}).get('enrichment', {}).get('buy_url')
         item["tcin"] = product.get('tcin')
         item["upc"] = product.get('item', {}).get('primary_barcode')
-        item["price_amount"] = product.get('price', {}).get('current_retail')
-        item["currency"] = re.sub(r'[\d.]+', '', product.get('price', {}).get('formatted_current_price', {}))
+        if product.get('price', {}).get('is_current_price_range'):
+            item["price_amount"] = product.get('price', {}).get('formatted_current_price')
+            item["currency"] = product.get('price', {}).get('formatted_current_price', {})[0]
+        else:
+            item["price_amount"] = product.get('price', {}).get('current_retail')
+            item["currency"] = re.sub(r'[\d.]+', '', product.get('price', {}).get('formatted_current_price', {}))
         item["description"] = product.get('item', {}).get('product_description', {}).get('downstream_description')
         item["specs"] = [re.sub(r'</?B>', '', val) for val in
                          product.get('item', {}).get('product_description', {}).get('bullet_descriptions', [])]
