@@ -15,13 +15,28 @@ crawl_date = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
 class ProductSpider(CrawlSpider):
     name = "product"
 
+    def __init__(self, *args, **kwargs):
+        super(ProductSpider, self).__init__(*args, **kwargs)
+        self.start_urls = kwargs.get('urls', None)
+        print(self.start_urls)
+
     def start_requests(self):
-        target_urls = self.get_urls('urls_to_crawl')
-        for target_url in target_urls:
-            try:
-                yield Request(target_url, callback=self.extract_product)
-            except ValueError:
-                logger.error("Invalid url: {}".format(target_url))
+        # Check if the 'urls' argument is provided from the command line
+        if self.start_urls:
+            target_urls = self.start_urls.split(',')
+            for target_url in target_urls:
+                try:
+                    yield Request(target_url, callback=self.extract_product)
+                except ValueError:
+                    self.logger.error("Invalid url: {}".format(target_url))
+        else:
+            # Fallback to fetch urls from 'urls' file if command line argument is not provided
+            target_urls = self.get_urls('urls_to_crawl')
+            for target_url in target_urls:
+                try:
+                    yield Request(target_url, callback=self.extract_product)
+                except ValueError:
+                    self.logger.error("Invalid url: {}".format(target_url))
 
     def extract_product(self, response):
         item = productItem()
