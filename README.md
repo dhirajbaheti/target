@@ -52,4 +52,29 @@ crawled_products_{crawl_date}.jsonl
 You may use jq or similar utilities to analyse the results.
 ```
 cat crawled_products_2023-08-03.jsonl | jq '[.tcin, .upc, .price_amount, .url]'
+
+e.g.
+cat crawled_products_2023-08-03.jsonl | head -5 | jq '[.tcin, .url]' 
+[
+  "79344798",
+  "https://www.target.com/p/baby-trend-expedition-race-tec-jogger-travel-system-8211-ultra-gray/-/A-79344798"
+]
+[
+  "16666753",
+  "https://www.target.com/p/brownie-bites-11-81oz-favorite-day-8482/-/A-16666753"
+]
+[
+  "79653286",
+  "https://www.target.com/p/kaysville-curved-back-wood-counter-height-barstool-threshold-designed-with-studio-mcgee/-/A-79653286"
+]
+[
+  "13493042",
+  "https://www.target.com/p/good-humor-strawberry-shortcake-frozen-dessert-bars-6pk/-/A-13493042"
+]
+[
+  "79344798",
+  "https://www.target.com/p/baby-trend-expedition-race-tec-jogger-travel-system-8211-ultra-gray/-/A-79344798"
+]
 ```
+
+
