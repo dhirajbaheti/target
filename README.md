@@ -1,4 +1,6 @@
-Start the crawl for a list of urls provided in the input file
+This project allows crawling the product specific details from the given set of urls from www.target.com 
+
+Start the crawl for a list of urls provided in the input file.
 
 ### Environment Setup
 1. Create a conda environment
